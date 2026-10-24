@@ -1,0 +1,323 @@
+/* ==========================================================================
+   VARIABLES Y TEMA DE CONSTRUCCIÓN E INGENIERÍA
+   ========================================================================== */
+:root {
+    --c-naranja: #d97706;      /* Naranja seguridad / Construcción */
+    --c-naranja-hover: #b45309;
+    --c-oscuro: #1e293b;       /* Pizarra oscuro / Acero estructural */
+    --c-gris-fondo: #f1f5f9;   /* Concreto claro */
+    --c-tarjeta: #ffffff;
+    --c-texto: #0f172a;
+    --c-subtexto: #475569;
+    --c-verde: #15803d;        /* Éxito / Estado húmedo */
+    --c-borde: #e2e8f0;
+    --c-sombra: rgba(15, 23, 42, 0.08);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    /* Oscurecimiento leve del 60% para mantener Nitidez y buen contraste de lectura */
+    background: linear-gradient(rgba(15, 23, 42, 0.60), rgba(15, 23, 42, 0.60)), 
+                url('poto2.jpg') center/cover fixed no-repeat;
+    color: var(--c-texto);
+    line-height: 1.6;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* ==========================================================================
+   CONTENEDOR Y ENCABEZADO CON BANNER DE OBRA
+   ========================================================================== */
+.contenedor-principal {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: var(--c-tarjeta);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px var(--c-sombra);
+}
+
+.titulo-principal {
+    background: linear-gradient(rgba(30, 41, 59, 0.88), rgba(30, 41, 59, 0.95)), 
+                url('https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&q=80&w=1000') center/cover;
+    color: #ffffff;
+    text-align: center;
+    padding: 45px 20px;
+    font-size: 2em;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    border-bottom: 5px solid var(--c-naranja);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.formulario-diseno, .seccion-resultados {
+    padding: 30px;
+}
+
+/* ==========================================================================
+   SECCIONES Y CAMPOS DEL FORMULARIO
+   ========================================================================== */
+.seccion-form {
+    background: #f8fafc;
+    border: 1px solid var(--c-borde);
+    border-left: 5px solid var(--c-oscuro);
+    border-radius: 10px;
+    padding: 22px;
+    margin-bottom: 22px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.seccion-form:hover {
+    box-shadow: 0 4px 12px var(--c-sombra);
+}
+
+.seccion-form h3 {
+    color: var(--c-oscuro);
+    font-size: 1.2em;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.grupo-input {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.grupo-input label {
+    font-weight: 600;
+    font-size: 0.92em;
+    color: var(--c-subtexto);
+    margin-bottom: 6px;
+}
+
+.grupo-input input,
+.grupo-input select {
+    padding: 11px 14px;
+    border: 1px solid var(--c-borde);
+    border-radius: 8px;
+    font-size: 0.95em;
+    background-color: #ffffff;
+    color: var(--c-texto);
+    transition: all 0.2s ease;
+}
+
+.grupo-input input:focus,
+.grupo-input select:focus {
+    outline: none;
+    border-color: var(--c-naranja);
+    box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.2);
+}
+
+.subcampo-desviacion {
+    display: none;
+    padding: 14px;
+    background-color: #fff7ed;
+    border-left: 4px solid var(--c-naranja);
+    border-radius: 6px;
+    margin-bottom: 16px;
+}
+
+/* BOTONES ESTILIZADOS */
+.btn-calcular {
+    width: 100%;
+    background: linear-gradient(135deg, var(--c-naranja), #b45309);
+    color: #ffffff;
+    font-size: 1.15em;
+    font-weight: 700;
+    padding: 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-calcular:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(217, 119, 6, 0.4);
+}
+
+.btn-secundario {
+    background-color: var(--c-oscuro);
+    color: #ffffff;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9em;
+    margin-top: 12px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-secundario:hover {
+    background-color: #334155;
+}
+
+/* ==========================================================================
+   SECCIÓN DE RESULTADOS Y TARJETAS DE PASOS
+   ========================================================================== */
+.seccion-resultados {
+    border-top: 2px dashed var(--c-borde);
+    margin-top: 20px;
+}
+
+.titulo-resultados {
+    text-align: center;
+    color: var(--c-oscuro);
+    font-size: 1.5em;
+    margin-bottom: 25px;
+}
+
+.tarjeta-paso {
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px var(--c-sombra);
+    background: #ffffff;
+    border-left: 6px solid var(--c-oscuro);
+}
+
+.tarjeta-paso h4 {
+    margin-bottom: 12px;
+    font-size: 1.1em;
+    color: var(--c-oscuro);
+}
+
+/* Personalización por pasos */
+.paso-1 { border-color: #0284c7; background: #f0f9ff; }
+.paso-2 { border-color: var(--c-naranja); background: #fff7ed; }
+.paso-3 { border-color: #16a34a; background: #f0fdf4; }
+.paso-4 { border-color: #0891b2; background: #ecfeff; }
+.paso-5 { border-color: #9333ea; background: #faf5ff; }
+.paso-6 { border-color: #ea580c; background: #fff7ed; }
+.paso-7 { border-color: #16a34a; background: #f0fdf4; }
+.paso-8 { border-color: #0891b2; background: #ecfeff; }
+.paso-9 { border-color: #9333ea; background: #faf5ff; }
+
+.grid-geometria {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.divisor-paso {
+    border: 0;
+    border-top: 1px dashed #cbd5e1;
+    margin: 14px 0;
+}
+
+/* Destacados */
+.destacado-verde   { font-size: 1.15em; color: #15803d; font-weight: 700; }
+.destacado-azul    { font-size: 1.15em; color: #0e7490; font-weight: 700; }
+.destacado-morado  { font-size: 1.15em; color: #7e22ce; font-weight: 700; }
+.destacado-naranja { font-size: 1.15em; color: #c2410c; font-weight: 700; }
+
+/* ==========================================================================
+   TABLAS RESUMEN FINAL (ESTADO SECO Y HÚMEDO DE OBRA)
+   ========================================================================== */
+.tarjeta-resumen {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 30px;
+    box-shadow: 0 4px 20px var(--c-sombra);
+    border: 1px solid var(--c-borde);
+}
+
+.titulo-resumen {
+    text-align: center;
+    color: var(--c-oscuro);
+    font-size: 1.4em;
+    margin-bottom: 22px;
+    font-weight: 800;
+}
+
+.contenedor-tablas {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.card-tabla {
+    flex: 1;
+    min-width: 310px;
+    background: #f8fafc;
+    border-radius: 10px;
+    padding: 16px;
+    border: 1px solid var(--c-borde);
+}
+
+.subtitulo-tabla {
+    text-align: center;
+    color: var(--c-oscuro);
+    margin-bottom: 14px;
+    font-size: 1.05em;
+    font-weight: 700;
+}
+
+.tabla-aci {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.9em;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--c-borde);
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.tabla-aci thead {
+    background-color: var(--c-oscuro);
+    color: #ffffff;
+}
+
+.tabla-aci th {
+    padding: 12px 8px;
+    font-weight: 600;
+}
+
+.tabla-aci td {
+    padding: 10px 8px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.tabla-aci tfoot {
+    font-weight: 800;
+    background-color: #f1f5f9;
+    color: var(--c-oscuro);
+}
+
+.tabla-aci tfoot td {
+    padding: 12px 8px;
+    border-bottom: none;
+}
+
+/* Clases de apoyo para tablas */
+.unidad {
+    font-weight: 400;
+    font-size: 0.85em;
+    opacity: 0.85;
+}
+
+.text-left { text-align: left !important; }
+.fw-bold { font-weight: 600; }
+.text-muted { color: #94a3b8; }
+.fila-impar { background-color: #f8fafc; }
+.val-humedo { color: var(--c-verde); font-weight: 700; }
+.highlight-total { font-size: 1.1em; color: var(--c-oscuro); }
+.highlight-total-hum { color: var(--c-verde); font-size: 1.1em; }

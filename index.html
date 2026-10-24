@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diseño de Mezclas ACI 211.1</title>
+    <!-- Hoja de Estilos Externa -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="contenedor-principal">
+        <h1 class="titulo-principal">DISEÑO DE MEZCLAS DE CONCRETO (ACI 211.1)</h1>
+
+        <form id="form-mezcla" class="formulario-diseno">
+            
+            <!-- SECCIÓN 1 -->
+            <section class="seccion-form">
+                <h3>1. Propiedades Generales</h3>
+                
+                <div class="grupo-input">
+                    <label for="fc">Resistencia a la compresión f'c (MPa):</label>
+                    <input type="number" id="fc" step="0.1" placeholder="Ej: 21">
+                </div>
+
+                <div class="grupo-input">
+                    <label for="tieneDesviacion">¿Cuenta con registros de desviación estándar (S)?</label>
+                    <select id="tieneDesviacion" onchange="alternarCampoS()">
+                        <option value="no" selected>No (Usar Tabla C.5.3.2.2 sin datos)</option>
+                        <option value="si">Sí (Ingresar Desviación Estándar S)</option>
+                    </select>
+                </div>
+
+                <div id="contenedor-s" class="subcampo-desviacion">
+                    <label for="desviacionS">Desviación Estándar S (MPa):</label>
+                    <input type="number" id="desviacionS" step="0.01" placeholder="Ej: 2.5">
+                </div>
+
+                <div class="grupo-input">
+                    <label for="slump">Asentamiento / Slump (pulgadas):</label>
+                    <input type="number" id="slump" step="0.5" placeholder="Ej: 3">
+                </div>
+
+                <div class="grupo-input">
+                    <label for="peCemento">Peso Específico del Cemento (g/cm³):</label>
+                    <input type="number" id="peCemento" step="0.01" value="3.15">
+                </div>
+            </section>
+
+            <!-- SECCIÓN 2 -->
+            <section class="seccion-form">
+                <h3>2. Propiedades de los Agregados</h3>
+                
+                <div class="grupo-input">
+                    <label for="tm">Tamaño Máximo - TM (pulgadas):</label>
+                    <select id="tm">
+                        <option value="2">2"</option>
+                        <option value="1.5">1 ½"</option>
+                        <option value="1" selected>1"</option>
+                        <option value="0.75">¾"</option>
+                        <option value="0.5">½"</option>
+                        <option value="0.375">⅜"</option>
+                    </select>
+                </div>
+
+                <div class="grupo-input">
+                    <label for="tmn">Tamaño Máximo Nominal - TMN (pulgadas):</label>
+                    <select id="tmn">
+                        <option value="2">2"</option>
+                        <option value="1.5">1 ½"</option>
+                        <option value="1">1"</option>
+                        <option value="0.75" selected>¾"</option>
+                        <option value="0.5">½"</option>
+                        <option value="0.375">⅜"</option>
+                    </select>
+                </div>
+
+                <div class="grupo-input">
+                    <label for="muGrava">Masa Unitaria Agregado Grueso (kg/m³):</label>
+                    <input type="number" id="muGrava" placeholder="Ej: 1600">
+                </div>
+
+                <div class="grupo-input">
+                    <label for="peGrava">Peso Específico Agregado Grueso (g/cm³):</label>
+                    <input type="number" id="peGrava" step="0.01" placeholder="Ej: 2.65">
+                </div>
+
+                <div class="grupo-input">
+                    <label for="peArena">Peso Específico Agregado Fino (g/cm³):</label>
+                    <input type="number" id="peArena" step="0.01" placeholder="Ej: 2.60">
+                </div>
+
+                <div class="grupo-input">
+                    <label for="mfArena">Módulo de Finura del Agregado Fino (MF):</label>
+                    <input type="number" id="mfArena" step="0.01" placeholder="Ej: 2.80">
+                </div>
+            </section>
+
+            <!-- SECCIÓN 3 -->
+            <section class="seccion-form">
+                <h3>3. Humedad y Absorción</h3>
+                
+                <div class="grupo-input">
+                    <label for="absGrava">% Absorción Agregado Grueso (%):</label>
+                    <input type="number" id="absGrava" step="0.1" placeholder="Ej: 1.2">
+                </div>
+
+                <div class="grupo-input">
+                    <label for="humGrava">% Humedad Agregado Grueso (%):</label>
+                    <input type="number" id="humGrava" step="0.1" placeholder="Ej: 2.0">
+                </div>
+
+                <div class="grupo-input">
+                    <label for="absArena">% Absorción Agregado Fino (%):</label>
+                    <input type="number" id="absArena" step="0.1" placeholder="Ej: 1.5">
+                </div>
+
+                <div class="grupo-input">
+                    <label for="humArena">% Humedad Agregado Fino (%):</label>
+                    <input type="number" id="humArena" step="0.1" placeholder="Ej: 4.5">
+                </div>
+            </section>
+
+            <!-- SECCIÓN 4 -->
+            <section class="seccion-form">
+                <h3>4. Condiciones de Exposición</h3>
+                
+                <div class="grupo-input">
+                    <label for="tipoExposicion">Nivel de Exposición (Aire Incluido):</label>
+                    <select id="tipoExposicion">
+                        <option value="atrapado" selected>Concreto sin aire incluido (Aire naturalmente atrapado)</option>
+                        <option value="ligera">Exposición Ligera (Mild)</option>
+                        <option value="moderada">Exposición Moderada (Class F1)</option>
+                        <option value="severa">Exposición Severa (Class F2/F3)</option>
+                    </select>
+                </div>
+
+                <div class="grupo-input">
+                    <label for="categoriaDurabilidad">Categoría de Exposición Especial (Tabla 9-1 ACI 318):</label>
+                    <select id="categoriaDurabilidad">
+                        <option value="F0" selected>F0 / S0 / P0 / C0 (Sin requisito especial)</option>
+                        <option value="P1">P1 - Concreto de baja permeabilidad (a/c máx = 0.50)</option>
+                        <option value="F1_F3">F1, F2, F3 - Congelamiento / Deshielo (a/c máx = 0.45)</option>
+                        <option value="C2">C2 - Corrosión por cloruros / Agua de mar (a/c máx = 0.40)</option>
+                    </select>
+                </div>
+            </section>
+
+            <button type="button" class="btn-calcular" onclick="procesarCalculos()">Calcular Mezcla</button>
+        </form>
+
+        <!-- SECCIÓN DE RESULTADOS -->
+        <div id="seccion-resultados" class="seccion-resultados" style="display: none;">
+            
+            <h2 class="titulo-resultados">Resultados del Proceso de Diseño</h2>
+
+            <!-- PASO 1 -->
+            <div class="tarjeta-paso paso-1">
+                <h4>Paso 1: Selección del Asentamiento (Slump)</h4>
+                <p>Slump ingresado: <b id="out-slump"></b> — <span id="out-slump-estado"></span></p>
+            </div>
+
+            <!-- PASO 2 -->
+            <div id="tarjeta-paso2" class="tarjeta-paso paso-2" style="display: none;">
+                <h4>Paso 2: Verificación de Tamaño Máximo (TM) y Nominal (TMN)</h4>
+                <p>TM Seleccionado: <b id="out-tm"></b> | TMN Seleccionado: <b id="out-tmn"></b></p>
+                <p class="nota-geometria"><small>Escribe la geometría para verificar las limitaciones normativas (NSR-10 / ACI C.3.3.2):</small></p>
+
+                <div class="grid-geometria">
+                    <label for="anchoB">Ancho sección b (mm):</label>
+                    <input type="number" id="anchoB" placeholder="Ej: 350">
+
+                    <label for="alturaH">Altura / Losa h (mm):</label>
+                    <input type="number" id="alturaH" placeholder="Ej: 450">
+
+                    <label for="recubrimiento">Recubrimiento (mm):</label>
+                    <input type="number" id="recubrimiento" placeholder="Ej: 40">
+
+                    <label for="numVarillas">N° Varillas principales (N):</label>
+                    <input type="number" id="numVarillas" placeholder="Ej: 4">
+
+                    <label for="diamVarilla">Diámetro varilla (# octavos):</label>
+                    <input type="number" id="diamVarilla" placeholder="Ej: 7 para #7">
+
+                    <label for="diamEstribo">Diámetro estribo (# octavos):</label>
+                    <input type="number" id="diamEstribo" placeholder="Ej: 3 para #3">
+                </div>
+
+                <button type="button" class="btn-secundario" onclick="evaluarSeparacionS()">Verificar Separación S y TMN Límite</button>
+
+                <div id="res-paso2" class="res-paso2" style="display: none;">
+                    <p>Cálculo del Espaciamiento Libre (S): <b id="out-s"></b> mm</p>
+                    <p>Límites Normativos ACI:</p>
+                    <ul>
+                        <li>1/5 del ancho encofrado (b/5): <span id="out-lim-a"></span> mm</li>
+                        <li>1/3 del espesor (h/3): <span id="out-lim-b"></span> mm</li>
+                        <li>3/4 del espaciamiento libre (3/4 S): <span id="out-lim-c"></span> mm</li>
+                    </ul>
+                    <p>TMN Máximo Permitido por Norma: <b id="out-tmn-max"></b></p>
+                    <p id="out-tmn-cumple"></p>
+                </div>
+            </div>
+
+            <!-- PASO 3 -->
+            <div id="tarjeta-paso3" class="tarjeta-paso paso-3" style="display: none;">
+                <h4>Paso 3: Estimación del Contenido de Aire (Tabla 9-5 ACI)</h4>
+                <p>Nivel de exposición: <b id="out-exposicion"></b> | TMN: <b id="out-tmn-paso3"></b></p>
+                <p>➡️ Contenido de aire estimado: <b id="out-aire" class="destacado-verde"></b> por volumen.</p>
+            </div>
+
+            <!-- PASO 4 -->
+            <div id="tarjeta-paso4" class="tarjeta-paso paso-4" style="display: none;">
+                <h4>Paso 4: Estimación del Agua de Mezclado (Tabla ACI 211.1)</h4>
+                <p>Para un Slump de <b id="out-slump-paso4"></b> y TMN de <b id="out-tmn-paso4"></b>:</p>
+                <p>➡️ Cantidad de agua requerida: <b id="out-agua" class="destacado-azul"></b></p>
+            </div>
+
+            <!-- PASO 5 -->
+            <div id="tarjeta-fcr" class="tarjeta-paso paso-5" style="display: none;">
+                <h4>Paso 5: Cálculo de Resistencia Promedio Requerida (f'cr)</h4>
+                <p>Resistencia especificada (f'c): <b id="out-fc-especificada"></b> MPa</p>
+                <p>➡️ Resistencia de diseño requerida (f'cr): <b id="out-fcr-calculado" class="destacado-morado"></b> MPa</p>
+            </div>
+
+            <!-- PASO 6 -->
+            <div id="tarjeta-paso6" class="tarjeta-paso paso-6" style="display: none;">
+                <h4>Paso 6: Selección de la Relación Agua - Cemento (a/c)</h4>
+                <p>1. Por Resistencia (f'cr = <b id="out-fcr-p6"></b> MPa): <b>a/c = <span id="out-ac-resistencia"></span></b></p>
+                <p>2. Por Durabilidad (Categoría <b id="out-cat-durabilidad"></b>): <b>a/c máximo = <span id="out-ac-durabilidad"></span></b></p>
+                <hr class="divisor-paso">
+                <p>➡️ <b>Relación a/c Gobernante (Menor valor): <span id="out-ac-final" class="destacado-naranja"></span></b></p>
+            </div>
+
+            <!-- PASO 7 -->
+            <div id="tarjeta-paso7" class="tarjeta-paso paso-7" style="display: none;">
+                <h4>Paso 7: Contenido de Cemento</h4>
+                <p>Ecuación: <i>Masa Cemento = Agua / (a/c)</i></p>
+                <p>➡️ <b>Masa de Cemento Requerida: <span id="out-cemento-kg" class="destacado-verde"></span> kg/m³</b></p>
+                <p>➡️ Cantidad aproximada en sacos (50 kg): <b><span id="out-sacos"></span> sacos/m³</b></p>
+                <p>➡️ <b>Volumen Absoluto de Cemento: <span id="out-cemento-vol" class="destacado-verde"></span> m³</b></p>
+            </div>
+
+            <!-- PASO 8 -->
+            <div id="tarjeta-paso8" class="tarjeta-paso paso-8" style="display: none;">
+                <h4>Paso 8: Contenido de Agregados (Volumen Absoluto)</h4>
+                
+                <h5>🪨 Agregado Grueso (Grava)</h5>
+                <p>• Volumen unitario de masa (b/b₀): <b id="out-vg-relativo"></b> m³ de grava/m³ concreto</p>
+                <p>• Masa Seca (Wsg = b/b₀ × MUA): <b id="out-wsg-grava" class="destacado-azul"></b> kg/m³</p>
+                <p>• Volumen Absoluto (Vg = Wsg / (Gg × 1000)): <b id="out-vol-grava" class="destacado-azul"></b> m³</p>
+                
+                <hr class="divisor-paso">
+                
+                <h5>🏖️ Agregado Fino (Arena)</h5>
+                <p>• Volumen Absoluto (Vf = 1 - V_agua - V_c - V_a - V_g): <b id="out-vol-arena" class="destacado-azul"></b> m³</p>
+                <p>• Masa Seca (Wf = Vf × Gf × 1000): <b id="out-wf-arena" class="destacado-azul"></b> kg/m³</p>
+            </div>
+
+            <!-- PASO 9 -->
+            <div id="tarjeta-paso9" class="tarjeta-paso paso-9" style="display: none;">
+                <h4>Paso 9: Ajuste por Humedad y Cantidades Finales</h4>
+                
+                <h5>💧 Agua de Mezclado Corregida</h5>
+                <p>• Agua Inicial: <b><span id="out-agua-ini"></span> kg/m³</b></p>
+                <p>• Corrección por Grava: <b><span id="out-aporte-grava"></span> kg</b></p>
+                <p>• Corrección por Arena: <b><span id="out-aporte-arena"></span> kg</b></p>
+                <p>➡️ <b>Agua Efectiva de Mezclado: <span id="out-agua-corregida" class="destacado-morado"></span> kg/m³ (L/m³)</b></p>
+                
+                <hr class="divisor-paso">
+                
+                <h5>⚖️ Pesos Húmedos de Agregados</h5>
+                <p>• Grava Húmeda: <b><span id="out-grava-humeda" class="destacado-morado"></span> kg/m³</b></p>
+                <p>• Arena Húmeda: <b><span id="out-arena-humeda" class="destacado-morado"></span> kg/m³</b></p>
+                
+                <hr class="divisor-paso">
+                
+                <h5>📦 Densidades del Concreto</h5>
+                <p>• Densidad Concreto Seco: <b><span id="out-densidad-seca"></span> kg/m³</b></p>
+                <p>• Densidad Concreto Húmedo: <b><span id="out-densidad-humeda" class="destacado-morado"></span> kg/m³</b></p>
+            </div>
+
+            <!-- PASO 10: RESUMEN FINAL DE TABLAS -->
+            <div id="tarjeta-resumen" class="tarjeta-resumen" style="display: none;">
+                <h3 class="titulo-resumen">📊 Cantidades de Materiales Secos y Húmedos</h3>
+                
+                <div class="contenedor-tablas">
+                    
+                    <!-- TABLA 1: MATERIALES SECOS -->
+                    <div class="card-tabla">
+                        <h4 class="subtitulo-tabla">Estado Seco (Volumen Absoluto)</h4>
+                        <table class="tabla-aci">
+                            <thead>
+                                <tr>
+                                    <th class="text-left">Ingredientes</th>
+                                    <th>Peso Seco<br><span class="unidad">(kg/m³)</span></th>
+                                    <th>Peso Específico<br><span class="unidad">(g/cm³)</span></th>
+                                    <th>Volumen Absoluto<br><span class="unidad">(L/m³)</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-left fw-bold">Cemento</td>
+                                    <td id="tbl-cemento-seco">-</td>
+                                    <td id="tbl-cemento-pe">-</td>
+                                    <td id="tbl-cemento-vol">-</td>
+                                </tr>
+                                <tr class="fila-impar">
+                                    <td class="text-left fw-bold">Agua</td>
+                                    <td id="tbl-agua-seco">-</td>
+                                    <td>1.00</td>
+                                    <td id="tbl-agua-vol">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left fw-bold">Aire</td>
+                                    <td class="text-muted">—</td>
+                                    <td class="text-muted">—</td>
+                                    <td id="tbl-aire-vol">-</td>
+                                </tr>
+                                <tr class="fila-impar">
+                                    <td class="text-left fw-bold">Grava</td>
+                                    <td id="tbl-grava-seco">-</td>
+                                    <td id="tbl-grava-pe">-</td>
+                                    <td id="tbl-grava-vol">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left fw-bold">Arena</td>
+                                    <td id="tbl-arena-seco">-</td>
+                                    <td id="tbl-arena-pe">-</td>
+                                    <td id="tbl-arena-vol">-</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td class="text-left">Total</td>
+                                    <td class="text-muted">—</td>
+                                    <td class="text-muted">—</td>
+                                    <td id="tbl-total-vol" class="highlight-total">1000.0</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <!-- TABLA 2: MATERIALES HÚMEDOS -->
+                    <div class="card-tabla">
+                        <h4 class="subtitulo-tabla">Estado Húmedo (Dosificación Obra)</h4>
+                        <table class="tabla-aci">
+                            <thead>
+                                <tr>
+                                    <th class="text-left">Ingredientes</th>
+                                    <th>Peso Seco<br><span class="unidad">(kg/m³)</span></th>
+                                    <th>Peso Húmedo<br><span class="unidad">(kg/m³)</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-left fw-bold">Cemento</td>
+                                    <td id="tbl-cemento-seco2">-</td>
+                                    <td id="tbl-cemento-hum">-</td>
+                                </tr>
+                                <tr class="fila-impar">
+                                    <td class="text-left fw-bold">Agua</td>
+                                    <td id="tbl-agua-seco2">-</td>
+                                    <td id="tbl-agua-hum" class="val-humedo">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left fw-bold">Aire</td>
+                                    <td class="text-muted">—</td>
+                                    <td class="text-muted">—</td>
+                                </tr>
+                                <tr class="fila-impar">
+                                    <td class="text-left fw-bold">Grava</td>
+                                    <td id="tbl-grava-seco2">-</td>
+                                    <td id="tbl-grava-hum" class="val-humedo">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left fw-bold">Arena</td>
+                                    <td id="tbl-arena-seco2">-</td>
+                                    <td id="tbl-arena-hum" class="val-humedo">-</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td class="text-left">Total</td>
+                                    <td id="tbl-total-seco">-</td>
+                                    <td id="tbl-total-hum" class="highlight-total-hum">-</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Script de Lógica -->
+    <script src="script.js"></script>
+</body>
+</html>
